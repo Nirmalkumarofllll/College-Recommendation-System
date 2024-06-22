@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <script>
+        function validateForm() {
+            var cutoffInput = parseInt(document.getElementById("cutoff").value);
+            if (cutoffInput > 200 || cutoffInput < 80) {
+                alert("Cutoff out of range! Please enter a value between 80 and 200.");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+        function validateDepartmentForm() {
+            var cutoffInput = parseInt(document.getElementById("cutoff").value);
+            // You can add more validation conditions for the department form here
+            if (cutoffInput > 200 || cutoffInput < 80) {
+                alert("Cutoff out of range! Please enter a value between 80 and 200.");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>College and Department Finder</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+                background-image: url("static/index1.jpg");
+                background-position: center;
+                background-repeat: repeat;
+                background-size: cover;
+                height: 100vh;
+            }
+    
+            .container {
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+    
+            form {
+                margin-bottom: 20px;
+            }
+    
+            label {
+                font-weight: bold;
+                color: #555;
+            }
+    
+            input[type="number"],
+            select {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0 15px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+    
+            input[type="submit"] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
+            }
+    
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+            .btn{
+                border: none;
+                padding: 5px;
+            }
+            .btn button{
+                padding: 8px;
+                border: none;
+                border-radius: 5px;
+                background-color: brown;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+
+            }
+            img{
+               
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+
+            }
+        </style>
+</head>
+<body>
+    <img src="static/download.png" alt="University Logo" width="100" height="100">
+    <div class="header">
+       
+        <div class="btn">
+            <button onclick="window.location.href='/show'"><i class="fas fa-list"></i> College List</button>
+            <button onclick="window.location.href='/'"><i class="fas fa-sign-out-alt"></i> Log out</button>
+        </div>
+    </div>
+        
+
+
+
+    <div class="container">
+    <h1>Find college</h1>
+    <form action="/collge_name" method="POST" onsubmit="return validateForm()">
+        <label for="cutoff">Enter your CUTOFF:</label><br>
+        <input type="number" id="cutoff" name="cutoff" required><br>
+
+        <label for="branch">Select Branch:</label>
+        <select id="branch" name="branch">
+            <option value="3">AGRICULTURAL AND IRRIGATION ENGG.(SS)</option>
+            <option value="17">BIO MEDICAL ENGINEERING (SS)</option>
+            <option value="21">CIVIL ENGINEERING</option>
+            <option value="28">COMPUTER SCIENCE AND ENGINEERING (SS)</option>
+            <option value="33">COMPUTER SCIENCE AND ENGINEERING</option>
+            <option value="38"> ELECTRONICS AND COMMUNICATION ENGINEERING</option>
+            <option value="39">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
+            <option value="41">ELECTRONICS AND COMMUNICATION ENGINEERING (SS)</option>
+            <option value="52">GEO INFORMATICS</option>
+            <option value="56">INDUSTRIAL ENGINEERING</option>
+            <option value="58">INFORMATION TECHNOLOGY (SS)</option>
+            <option value="64">MATERIAL SCIENCE AND ENGINEERING (SS)</option>
+            <option value="67">MECHANICAL ENGINEERING</option>
+            <option value="71">MINING ENGINEERING</option>
+            <option value="73">MANUFACTURING ENGINEERING</option>
+            <option value="93">PRINTING AND PACKING TECHNOLOGY</option>
+            <option value="106">CIVIL ENGINEERING (TAMIL MEDIUM)</option>
+            <option value="107">MECHANICAL ENGINEERING (TAMIL MEDIUM)</option>
+            <option value="7">APPAREL TECHNOLOGY (SS)</option>
+            <option value="24">CHEMICAL ENGINEERING</option>
+            <option value="27">CHEMICAL ENGINEERING (SS)</option>
+            <option value="32">CERAMIC TECHNOLOGY (SS)</option>
+            <option value="48">FOOD TECHNOLOGY (SS)</option>
+            <option value="54">INDUSTRIAL BIO TECHNOLOGY</option>
+            <option value="60">INDUSTRIAL BIO TECHNOLOGY (SS)</option>
+            <option value="63">LEATHER TECHNOLOGY</option>
+            <option value="88">PHARMACEUTICAL TECHNOLOGY (SS)</option>
+            <option value="90">PETROLEUM ENGINEERING AND TECHNOLOGY (SS)</option>
+            <option value="105">TEXTILE TECHNOLOGY</option>
+            <option value="1">AERONAUTICAL ENGINEERING</option>
+            <option value="8">AUTOMOBILE ENGINEERING (SS)</option>
+            <option value="10">AUTOMOBILE ENGINEERING</option>
+            <option value="40">ELECTRONICS AND INSTRUMENTATION ENGINEERING</option>
+            <option value="45">ELECTRONICS AND INSTRU ENGG(SS)</option>
+            <option value="68">MECHANICAL ENGINEERING (SS)</option>
+            <option value="91">PRODUCTION ENGINEERING</option>
+            <option value="97">RUBBER AND PLASTIC TECHNOLOGY</option>
+            <option value="61">INFORMATION TECHNOLOGY</option>
+            <option value="16">BIO TECHNOLOGY</option>
+            <option value="13">BIO MEDICAL ENGINEERING</option>
+            <option value="75">MARINE ENGINEERING</option>
+            <option value="65">MECHATRONICS</option>
+            <option value="85">PETROLEUM ENGINEERING</option>
+            <option value="2">AGRICULTURAL ENGINEERING</option>
+            <option value="66">MEDICAL ELECTRONICS ENGINEERING</option>
+            <option value="84">PETRO CHEMICAL ENGINEERING</option>
+            <option value="78">MECHANICAL AND AUTOMATION ENGINEERING</option>
+            <option value="55">INSTRUMENTATION AND CONTROL ENGINEERING</option>
+            <option value="82">PLASTIC TECHNOLOGY</option>
+            <option value="49">FASHION TECHNOLOGY</option>
+            <option value="15">BIO TECHNOLOGY (SS)</option>
+            <option value="29">CIVIL ENGINEERING (SS)</option>
+            <option value="43">ELECTRICAL AND ELECTRONICS (SANDWICH) (SS)</option>
+            <option value="50">FASHION TECHNOLOGY (SS)</option>
+            <option value="62">INSTRUMENTATION AND CONTROL ENGINEERING (SS)</option>
+            <option value="76">MECHANICAL ENGINEERING (SANDWICH) (SS)</option>
+            <option value="77">METALLURGICAL ENGINEERING</option>
+            <option value="79">METALLURGICAL ENGINEERING (SS)</option>
+            <option value="89">PRODUCTION ENGINEERING (SS)</option>
+            <option value="92">PRODUCTION ENGINEERING (SANDWICH) (SS)</option>
+            <option value="95">ROBOTICS AND AUTOMATION (SS)</option>
+            <option value="104">TEXTILE TECHNOLOGY (SS)</option>
+            <option value="46">ELECTRICAL AND ELECTRONICS ENGINEERING (SS)</option>
+            <option value="53">HANDLOOM AND TEXTILE TECHNOLOGY</option>
+            <option value="47">FOOD TECHNOLOGY</option>
+            <option value="81">Nano Science and Technology</option>
+            <option value="83">PETRO CHEMICAL TECHNOLOGY</option>
+            <option value="102">TEXTILE CHEMISTRY</option>
+            <option value="44">ELECTRONICS AND TELECOMMUNICATION ENGINEERING</option>
+            <option value="31">CIVIL ENGINEERING AND PLANNING</option>
+            <option value="42">ENVIRONMENTAL ENGINEERING</option>
+            <option value="86">PHARMACEUTICAL TECHNOLOGY</option>
+            <option value="96">ROBOTICS AND AUTOMATION</option>
+            <option value="59">INDUSTRIAL ENGINEERING AND MANAGEMENT</option>
+            <option value="87">Polymer Technology</option>
+            <option value="70">MECHANICAL ENGINEERING (SANDWICH)</option>
+            <option value="69">MECHATRONICS (SS)</option>
+            <option value="19">CHEMICAL AND ELECTRO CHEMICAL ENGINEERING (SS)</option>
+            <option value="57">Information Science and Engineering</option>
+            <option value="51">GEO INFORMATICS ENGINEERING</option>
+            <option value="6">AEROSPACE ENGINEERING</option>
+            <option value="37">CIVIL AND STRUCTUTURAL ENGINEERING</option>
+            <option value="72">MECHANICAL ENGINEERING (MANUFACTURING)</option>
+            <option value="5">COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)</option>
+            <option value="12">Computer Science and Engineering (Big Data Analytics)</option>
+            <option value="18">COMPUTER SCIENCE AND BUSSINESS SYSTEM</option>
+            <option value="34">COMPUTER TECHNOLOGY</option>
+            <option value="30">COMPUTER AND COMMUNICATION ENGINEERING</option>
+            <option value="0">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
+            <option value="80">Mechatronics Engineering</option>
+            <option value="4">Artificial Intelligence and Machine Learning</option>
+            <option value="36">Cyber Security</option>
+            <option value="101">Safety and Fire Engineering</option>
+            <option value="103">Computer Science and Technology</option>
+            <option value="100">Information Science and Engineering</option>
+            <option value="99">Computer Science and Engineering (Cyber Security)</option>
+            <option value="26">M.Tech. Computer Science and Engineering (Integrated 5 years)</option>
+            <option value="74">Mechanical and Mechatronics Engineering (Additive Manufacturing)</option>
+            <option value="98">Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)</option>
+            <option value="11">Bio Technology and Bio Chemical Engineering</option>
+            <option value="35">Computer Science and Business System (SS)</option>
+            <option value="22">COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)</option>
+            <option value="20">COMPUTER SCIENCE AND DESIGN</option>
+            <option value="9">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE (SS)</option>
+            <option value="108">COMPUTER SCIENCE AND ENGINEERING (TAMIL)</option>
+            <option value="94">PHARMACEUTICAL ENGINEERING</option>
+            <option value="14">B.Plan</option>
+            <option value="25">Computer Science and Engineering (Internet of Things)</option>
+            <option value="23">Computer Science and Engineering (Artificial Intelligence and Machine Learning) (SS)</option>
+</select>
+
+
+        <label for="CASTE">Select CASTE:</label>
+        <select id="CASTE" name="CASTE">
+            <option value="0">BC</option>
+            <option value="1">BCM</option>
+            <option value="2">MBC</option>
+            <option value="3">OC</option>
+            <option value="4">SC</option>
+            <option value="5">SCA</option>
+            <option value="6">ST</option>
+        </select>
+
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<div class="container">
+    
+
+<h1>Find department</h1>
+    <form action="/branch_name" method="POST" onsubmit="return validateDepartmentForm()">
+        <label for="cutoff">Enter your CUTOFF:</label><br>
+        <input type="number" id="cutoff" name="cutoff" required><br>
+
+        <label for="collge_code">Enter college code :</label><br>
+        <input type="number" id="collge_code" name="collge_code" required><br>
+
+        <label for="CASTE">Select CASTE:</label>
+        <select id="CASTE" name="CASTE">
+            <option value="0">BC</option>
+            <option value="1">BCM</option>
+            <option value="2">MBC</option>
+            <option value="3">OC</option>
+            <option value="4">SC</option>
+            <option value="5">SCA</option>
+            <option value="6">ST</option>
+        </select>
+        <input type="submit" value="Submit">
+</form>
+</div>
+</body>
+</html>

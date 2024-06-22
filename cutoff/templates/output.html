@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+  <style>
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("static/output.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    text-align: center;
+}
+
+.message-box {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgb(255, 37, 37);
+    
+  font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+.message-box  p{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.no-results {
+    font-style: italic;
+    color: #000000;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgb(255, 37, 37);
+    font-weight: bold;
+}
+button{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 8px;
+  border: none;
+  background-color: chocolate;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+    
+  </style>
+  </head>
+  <body>
+
+    <a href="/input"><button>Back</button></a>
+    <div class="container">
+      {% if status == 0 %}
+          {% if collegename %}
+              {% for i in collegename %}
+                  <div class="message-box">
+                      <p>{{ i }}</p>
+                  </div>
+              {% endfor %}
+          {% else %}
+              <p class="no-results">Did not find any college name for your cutoff.</p>
+          {% endif %}
+      {% endif %}
+    <div class="message-box">
+      {{ branch_name }}
+    </div>
+  </div>
+
+   
+  </body>
+</html>

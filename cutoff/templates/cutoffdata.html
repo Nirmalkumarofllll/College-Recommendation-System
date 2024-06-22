@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutoff Data</title>
+    <style>
+        body{
+            background-color: rgb(244, 178, 191);
+        }
+        h2{
+            text-align: center;
+            font-size: 25px;
+            
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        button{
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            background-color: rgb(182, 255, 183);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>CUTOFF DATA</h2>
+    <button onclick="goBack()">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <table>
+        <tr>
+            <th>College Code</th>
+            <th>College Name</th>
+            <th>Branch Code</th>
+            <th>Branch Name</th>
+            <th>OC</th>
+            <th>BC</th>
+            <th>BCM</th>
+            <th>MBC</th>
+            <th>MBCDNC</th>
+            <th>MBCV</th>
+            <th>SC</th>
+            <th>SCA</th>
+            <th>ST</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row['College Code'] }}</td>
+            <td>{{ row['College Name'] }}</td>
+            <td>{{ row['Branch Code'] }}</td>
+            <td>{{ row['Branch Name'] }}</td>
+            <td>{{ row['OC'] }}</td>
+            <td>{{ row['BC'] }}</td>
+            <td>{{ row['BCM'] }}</td>
+            <td>{{ row['MBC'] }}</td>
+            <td>{{ row['MBCDNC'] }}</td>
+            <td>{{ row['MBCV'] }}</td>
+            <td>{{ row['SC'] }}</td>
+            <td>{{ row['SCA'] }}</td>
+            <td>{{ row['ST'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

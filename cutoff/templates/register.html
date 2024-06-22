@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register/Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* CSS for hiding and showing forms */
+        .login-form, .forget-password-form {
+            display: none;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("static/av1.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        h2 {
+            color: rgba(0, 0, 0, 0.925);
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        form {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+          backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
+        }
+        label {
+            color: rgb(255, 0, 0);
+            font-size: 19px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            display: block;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid rgba(17, 8, 17, 0.515);
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            margin-left: 100px;
+            padding: 10px;
+            background-color: rgb(0, 89, 0);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        
+            cursor: pointer
+        }
+        input[type="submit"]:hover {
+            background-color: rgb(11, 133, 39);
+        }
+        p {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.925);
+            font-family: 'Times New Roman', Times, serif;
+        }
+        a {
+            color: rgb(2, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <div id="register-form">
+        <form action="/register" method="post">
+            <h2>Register</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br>
+            <label for="usermail">User mail:</label>
+            <input type="email" id="usermail" name="usermail"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <input type="submit" value="Register">
+            <p>Already have an account? <a href="#" onclick="toggleForm('login-form')">Login here</a></p>
+
+        </form>
+    </div>
+
+    <div id="login-form" class="login-form">
+        <form action="/login" method="post">
+            <h2>Login</h2>
+            <label for="usermail">Usermail:</label>
+            <input type="text" id="usermail" name="usermail"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <input type="submit" value="Login">
+            <p>Forgot password? <a href="#" onclick="toggleForm('forget-password-form')">Reset here</a></p>
+        <p>Don't have an account? <a href="#" onclick="toggleForm('register-form')">Register here</a></p>
+        </form>
+        
+    </div>
+
+    <div id="forget-password-form" class="forget-password-form">
+        <form action="/reset_password" method="post" onsubmit="return validatePassword()">
+            <h2>Reset Password</h2>
+            <label for="usermail">Usermail:</label>
+            <input type="email" id="usermail" name="usermail"><br>
+            <label for="newpassword">New Password:</label>
+            <input type="password" id="newpassword" name="newpassword"><br>
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password"><br>
+            <input type="submit" value="Reset Password">
+            <p id="password-mismatch-msg" style="color: red; display: none;">Password does not match!</p>
+        <p>Remember your password? <a href="#" onclick="toggleForm('login-form')">Login here</a></p>
+        </form>
+        
+    </div>
+    
+    <script>
+        function validatePassword() {
+            var newPassword = document.getElementById('newpassword').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            var mismatchMsg = document.getElementById('password-mismatch-msg');
+    
+            if (newPassword !== confirmPassword) {
+                mismatchMsg.style.display = 'block';
+                return false; // Prevent form submission
+            } else {
+                mismatchMsg.style.display = 'none';
+                return true; // Allow form submission
+            }
+        }
+    </script>
+    
+
+    <script>
+        function toggleForm(formId) {
+            var forms = document.querySelectorAll('.login-form, .forget-password-form, #register-form');
+
+            forms.forEach(form => {
+                if (form.id === formId) {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
