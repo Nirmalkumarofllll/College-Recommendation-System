@@ -1,6 +1,6 @@
 <h1 align="center">College Recommendation System</h1>
 
-> Check out My portfolio: [Portfolio](https://nirmalkumarofllll.github.io/Portfolio/)
+> Check out my portfolio: [Portfolio](https://nirmalkumarofllll.github.io/Portfolio/)
 
 ## Login
 
@@ -19,4 +19,4 @@ The college list feature is developed for displaying cutoff data under various c
 
 ![Loginpage](./imgs/clglist.png)
 
-> Learn How to do this project: [Project](https://nirmalkumarofllll.github.io/Portfolio/CRS.html)
+> Learn how to do this project: [Project](https://nirmalkumarofllll.github.io/Portfolio/CRS.html)
