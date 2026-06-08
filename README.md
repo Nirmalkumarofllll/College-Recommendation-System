@@ -22,6 +22,7 @@ The college list feature is developed for displaying cutoff data under various c
 <p align="justify">
 The recommendation results are generated based on the student's cutoff marks and caste category, ensuring personalized and accurate admission guidance. Students can search by selecting a specific college to view the departments for which they are likely eligible based on their cutoff score. Alternatively, they can choose a preferred department to explore colleges where they have admission opportunities. This flexible approach helps students evaluate multiple admission pathways, compare available options, and make informed decisions about their higher education journey. By providing data-driven recommendations tailored to individual academic profiles, the system simplifies the college selection process and improves the overall admission planning experience.
 </p>
+
 ![Loginpage](./imgs/Result.png)
 
 > Learn how to do this project: [Project](https://nirmalkumarofllll.github.io/Portfolio/CRS.html)
