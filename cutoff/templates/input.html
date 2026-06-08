@@ -3,289 +3,593 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Form</title>
-    <script>
-        function validateForm() {
-            var cutoffInput = parseInt(document.getElementById("cutoff").value);
-            if (cutoffInput > 200 || cutoffInput < 80) {
-                alert("Cutoff out of range! Please enter a value between 80 and 200.");
-                return false; // Prevent form submission
-            }
-            return true; // Allow form submission
-        }
-        function validateDepartmentForm() {
-            var cutoffInput = parseInt(document.getElementById("cutoff").value);
-            // You can add more validation conditions for the department form here
-            if (cutoffInput > 200 || cutoffInput < 80) {
-                alert("Cutoff out of range! Please enter a value between 80 and 200.");
-                return false; // Prevent form submission
-            }
-            return true; // Allow form submission
-        }
-    </script>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <title>College Recommendation System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>College and Department Finder</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #fff;
-                margin: 0;
-                padding: 0;
-                background-image: url("static/index1.jpg");
-                background-position: center;
-                background-repeat: repeat;
-                background-size: cover;
-                height: 100vh;
+        body {
+            min-height: 100vh;
+            font-family: "Inter", sans-serif;
+            background: #eef2f0;
+            color: #1a1a1a;
+        }
+
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 32px;
+            background: #fff;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-name {
+            font-family: "DM Serif Display", serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.04em;
+            color: #1a1a1a;
+        }
+
+        .brand-icon {
+            font-size: 1.25rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, color 0.2s;
+        }
+
+        .nav-btn-outline {
+            background: #f0faf5;
+            color: #3d9a7c;
+            border: 1px solid #d5f5e3;
+        }
+
+        .nav-btn-outline:hover {
+            background: #d8eee8;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn-dark {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .nav-btn-dark:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .page-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 56px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .page-header h1 {
+            font-family: "DM Serif Display", serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #888;
+            font-size: 0.95rem;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .form-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-card-header {
+            background: #d8eee8;
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .form-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #3d9a7c;
+            flex-shrink: 0;
+        }
+
+        .form-card-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .form-card-header p {
+            font-size: 0.82rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .form-card-body {
+            padding: 28px;
+        }
+
+        .field-group {
+            margin-bottom: 22px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 0.78rem;
+            color: #999;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .field-group input,
+        .field-group select {
+            width: 100%;
+            border: none;
+            border-bottom: 1.5px solid #ddd;
+            padding: 10px 0;
+            font-size: 0.92rem;
+            font-family: inherit;
+            color: #1a1a1a;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.2s;
+            appearance: none;
+            border-radius: 0;
+        }
+
+        .field-group select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 4px center;
+            padding-right: 24px;
+        }
+
+        .field-group input:focus,
+        .field-group select:focus {
+            border-bottom-color: #5cb89a;
+        }
+
+        .field-group input::placeholder {
+            color: #bbb;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 50px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .submit-btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+            max-width: 420px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            line-height: 1.45;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            transform: translateX(calc(100% + 32px));
+            opacity: 0;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification.error {
+            background: #fff5f5;
+            color: #c0392b;
+            border: 1px solid #fadbd8;
+        }
+
+        .notification-close {
+            flex-shrink: 0;
+            border: none;
+            background: transparent;
+            color: inherit;
+            font-size: 1.2rem;
+            line-height: 1;
+            cursor: pointer;
+            opacity: 0.6;
+            padding: 0 2px;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .forms-grid {
+                grid-template-columns: 1fr;
             }
-    
-            .container {
-                max-width: 800px;
-                margin: 20px auto;
-                padding: 20px;
-                background-color: #fff;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .top-nav {
+                padding: 14px 16px;
+                flex-wrap: wrap;
             }
-    
-            h1 {
-                text-align: center;
-                color: #333;
-            }
-    
-            form {
-                margin-bottom: 20px;
-            }
-    
-            label {
-                font-weight: bold;
-                color: #555;
-            }
-    
-            input[type="number"],
-            select {
+
+            .nav-actions {
                 width: 100%;
-                padding: 10px;
-                margin: 5px 0 15px 0;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-sizing: border-box;
-                font-size: 16px;
+                justify-content: flex-end;
             }
-    
-            input[type="submit"] {
-                background-color: #4CAF50;
-                color: white;
-                padding: 14px 20px;
-                margin: 8px 0;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                width: 100%;
-                font-size: 16px;
-            }
-    
-            input[type="submit"]:hover {
-                background-color: #45a049;
-            }
-            .btn{
-                border: none;
-                padding: 5px;
-            }
-            .btn button{
-                padding: 8px;
-                border: none;
-                border-radius: 5px;
-                background-color: brown;
-                color: white;
-                font-weight: bold;
-                cursor: pointer;
 
+            .page-content {
+                padding: 28px 16px 40px;
             }
-            img{
-               
-                position: absolute;
-                top: 10px;
-                right: 10px;
 
-
+            .page-header h1 {
+                font-size: 1.6rem;
             }
-        </style>
+
+            .form-card-body {
+                padding: 22px 20px;
+            }
+
+            .notification {
+                left: 16px;
+                right: 16px;
+                min-width: auto;
+                max-width: none;
+                transform: translateY(calc(-100% - 32px));
+            }
+
+            .notification.show {
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <img src="static/download.png" alt="University Logo" width="100" height="100">
-    <div class="header">
-       
-        <div class="btn">
-            <button onclick="window.location.href='/show'"><i class="fas fa-list"></i> College List</button>
-            <button onclick="window.location.href='/'"><i class="fas fa-sign-out-alt"></i> Log out</button>
-        </div>
+
+    <div id="notification" class="notification error" role="alert" aria-live="assertive">
+        <span>⚠</span>
+        <span id="notification-text"></span>
+        <button type="button" class="notification-close" onclick="hideNotification()" aria-label="Close">&times;</button>
     </div>
-        
 
+    <header class="top-nav">
+        <div class="brand">
+            <button class="nav-btn nav-btn-outline" onclick="window.location.href='/show'">
+                <i class="fas fa-list"></i> College List
+            </button>
+        </div>
+        <div class="nav-actions">
+            
+            <button class="nav-btn nav-btn-dark" onclick="window.location.href='/logout'">
+                <i class="fas fa-sign-out-alt"></i> Log out
+            </button>
+        </div>
+    </header>
 
+    <main class="page-content">
+        <div class="page-header">
+            <h1>College &amp; Department Finder</h1>
+            <p>Enter your cutoff score and preferences to discover matching colleges or departments.</p>
+        </div>
 
-    <div class="container">
-    <h1>Find college</h1>
-    <form action="/collge_name" method="POST" onsubmit="return validateForm()">
-        <label for="cutoff">Enter your CUTOFF:</label><br>
-        <input type="number" id="cutoff" name="cutoff" required><br>
+        <div class="forms-grid">
+            <div class="form-card">
+                <div class="form-card-header">
+                    <div class="form-card-icon"><i class="fas fa-university"></i></div>
+                    <div>
+                        <h2>Find College</h2>
+                        <p>Get college recommendations based on your cutoff and branch.</p>
+                    </div>
+                </div>
+                <div class="form-card-body">
+                    <form action="/collge_name" method="POST" onsubmit="return validateForm()">
+                        <div class="field-group">
+                            <label for="cutoff">Enter your CUTOFF</label>
+                            <input type="number" id="cutoff" name="cutoff" placeholder="Score between 80 and 200" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="branch">Select Branch</label>
+                            <select id="branch" name="branch">
+                                <option value="3">AGRICULTURAL AND IRRIGATION ENGG.(SS)</option>
+                                <option value="17">BIO MEDICAL ENGINEERING (SS)</option>
+                                <option value="21">CIVIL ENGINEERING</option>
+                                <option value="28">COMPUTER SCIENCE AND ENGINEERING (SS)</option>
+                                <option value="33">COMPUTER SCIENCE AND ENGINEERING</option>
+                                <option value="38"> ELECTRONICS AND COMMUNICATION ENGINEERING</option>
+                                <option value="39">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
+                                <option value="41">ELECTRONICS AND COMMUNICATION ENGINEERING (SS)</option>
+                                <option value="52">GEO INFORMATICS</option>
+                                <option value="56">INDUSTRIAL ENGINEERING</option>
+                                <option value="58">INFORMATION TECHNOLOGY (SS)</option>
+                                <option value="64">MATERIAL SCIENCE AND ENGINEERING (SS)</option>
+                                <option value="67">MECHANICAL ENGINEERING</option>
+                                <option value="71">MINING ENGINEERING</option>
+                                <option value="73">MANUFACTURING ENGINEERING</option>
+                                <option value="93">PRINTING AND PACKING TECHNOLOGY</option>
+                                <option value="106">CIVIL ENGINEERING (TAMIL MEDIUM)</option>
+                                <option value="107">MECHANICAL ENGINEERING (TAMIL MEDIUM)</option>
+                                <option value="7">APPAREL TECHNOLOGY (SS)</option>
+                                <option value="24">CHEMICAL ENGINEERING</option>
+                                <option value="27">CHEMICAL ENGINEERING (SS)</option>
+                                <option value="32">CERAMIC TECHNOLOGY (SS)</option>
+                                <option value="48">FOOD TECHNOLOGY (SS)</option>
+                                <option value="54">INDUSTRIAL BIO TECHNOLOGY</option>
+                                <option value="60">INDUSTRIAL BIO TECHNOLOGY (SS)</option>
+                                <option value="63">LEATHER TECHNOLOGY</option>
+                                <option value="88">PHARMACEUTICAL TECHNOLOGY (SS)</option>
+                                <option value="90">PETROLEUM ENGINEERING AND TECHNOLOGY (SS)</option>
+                                <option value="105">TEXTILE TECHNOLOGY</option>
+                                <option value="1">AERONAUTICAL ENGINEERING</option>
+                                <option value="8">AUTOMOBILE ENGINEERING (SS)</option>
+                                <option value="10">AUTOMOBILE ENGINEERING</option>
+                                <option value="40">ELECTRONICS AND INSTRUMENTATION ENGINEERING</option>
+                                <option value="45">ELECTRONICS AND INSTRU ENGG(SS)</option>
+                                <option value="68">MECHANICAL ENGINEERING (SS)</option>
+                                <option value="91">PRODUCTION ENGINEERING</option>
+                                <option value="97">RUBBER AND PLASTIC TECHNOLOGY</option>
+                                <option value="61">INFORMATION TECHNOLOGY</option>
+                                <option value="16">BIO TECHNOLOGY</option>
+                                <option value="13">BIO MEDICAL ENGINEERING</option>
+                                <option value="75">MARINE ENGINEERING</option>
+                                <option value="65">MECHATRONICS</option>
+                                <option value="85">PETROLEUM ENGINEERING</option>
+                                <option value="2">AGRICULTURAL ENGINEERING</option>
+                                <option value="66">MEDICAL ELECTRONICS ENGINEERING</option>
+                                <option value="84">PETRO CHEMICAL ENGINEERING</option>
+                                <option value="78">MECHANICAL AND AUTOMATION ENGINEERING</option>
+                                <option value="55">INSTRUMENTATION AND CONTROL ENGINEERING</option>
+                                <option value="82">PLASTIC TECHNOLOGY</option>
+                                <option value="49">FASHION TECHNOLOGY</option>
+                                <option value="15">BIO TECHNOLOGY (SS)</option>
+                                <option value="29">CIVIL ENGINEERING (SS)</option>
+                                <option value="43">ELECTRICAL AND ELECTRONICS (SANDWICH) (SS)</option>
+                                <option value="50">FASHION TECHNOLOGY (SS)</option>
+                                <option value="62">INSTRUMENTATION AND CONTROL ENGINEERING (SS)</option>
+                                <option value="76">MECHANICAL ENGINEERING (SANDWICH) (SS)</option>
+                                <option value="77">METALLURGICAL ENGINEERING</option>
+                                <option value="79">METALLURGICAL ENGINEERING (SS)</option>
+                                <option value="89">PRODUCTION ENGINEERING (SS)</option>
+                                <option value="92">PRODUCTION ENGINEERING (SANDWICH) (SS)</option>
+                                <option value="95">ROBOTICS AND AUTOMATION (SS)</option>
+                                <option value="104">TEXTILE TECHNOLOGY (SS)</option>
+                                <option value="46">ELECTRICAL AND ELECTRONICS ENGINEERING (SS)</option>
+                                <option value="53">HANDLOOM AND TEXTILE TECHNOLOGY</option>
+                                <option value="47">FOOD TECHNOLOGY</option>
+                                <option value="81">Nano Science and Technology</option>
+                                <option value="83">PETRO CHEMICAL TECHNOLOGY</option>
+                                <option value="102">TEXTILE CHEMISTRY</option>
+                                <option value="44">ELECTRONICS AND TELECOMMUNICATION ENGINEERING</option>
+                                <option value="31">CIVIL ENGINEERING AND PLANNING</option>
+                                <option value="42">ENVIRONMENTAL ENGINEERING</option>
+                                <option value="86">PHARMACEUTICAL TECHNOLOGY</option>
+                                <option value="96">ROBOTICS AND AUTOMATION</option>
+                                <option value="59">INDUSTRIAL ENGINEERING AND MANAGEMENT</option>
+                                <option value="87">Polymer Technology</option>
+                                <option value="70">MECHANICAL ENGINEERING (SANDWICH)</option>
+                                <option value="69">MECHATRONICS (SS)</option>
+                                <option value="19">CHEMICAL AND ELECTRO CHEMICAL ENGINEERING (SS)</option>
+                                <option value="57">Information Science and Engineering</option>
+                                <option value="51">GEO INFORMATICS ENGINEERING</option>
+                                <option value="6">AEROSPACE ENGINEERING</option>
+                                <option value="37">CIVIL AND STRUCTUTURAL ENGINEERING</option>
+                                <option value="72">MECHANICAL ENGINEERING (MANUFACTURING)</option>
+                                <option value="5">COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)</option>
+                                <option value="12">Computer Science and Engineering (Big Data Analytics)</option>
+                                <option value="18">COMPUTER SCIENCE AND BUSSINESS SYSTEM</option>
+                                <option value="34">COMPUTER TECHNOLOGY</option>
+                                <option value="30">COMPUTER AND COMMUNICATION ENGINEERING</option>
+                                <option value="0">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
+                                <option value="80">Mechatronics Engineering</option>
+                                <option value="4">Artificial Intelligence and Machine Learning</option>
+                                <option value="36">Cyber Security</option>
+                                <option value="101">Safety and Fire Engineering</option>
+                                <option value="103">Computer Science and Technology</option>
+                                <option value="100">Information Science and Engineering</option>
+                                <option value="99">Computer Science and Engineering (Cyber Security)</option>
+                                <option value="26">M.Tech. Computer Science and Engineering (Integrated 5 years)</option>
+                                <option value="74">Mechanical and Mechatronics Engineering (Additive Manufacturing)</option>
+                                <option value="98">Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)</option>
+                                <option value="11">Bio Technology and Bio Chemical Engineering</option>
+                                <option value="35">Computer Science and Business System (SS)</option>
+                                <option value="22">COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)</option>
+                                <option value="20">COMPUTER SCIENCE AND DESIGN</option>
+                                <option value="9">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE (SS)</option>
+                                <option value="108">COMPUTER SCIENCE AND ENGINEERING (TAMIL)</option>
+                                <option value="94">PHARMACEUTICAL ENGINEERING</option>
+                                <option value="14">B.Plan</option>
+                                <option value="25">Computer Science and Engineering (Internet of Things)</option>
+                                <option value="23">Computer Science and Engineering (Artificial Intelligence and Machine Learning) (SS)</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label for="CASTE">Select CASTE</label>
+                            <select id="CASTE" name="CASTE">
+                                <option value="0">BC</option>
+                                <option value="1">BCM</option>
+                                <option value="2">MBC</option>
+                                <option value="3">OC</option>
+                                <option value="4">SC</option>
+                                <option value="5">SCA</option>
+                                <option value="6">ST</option>
+                            </select>
+                        </div>
+                        <input type="submit" class="submit-btn" value="Find Colleges">
+                    </form>
+                </div>
+            </div>
 
-        <label for="branch">Select Branch:</label>
-        <select id="branch" name="branch">
-            <option value="3">AGRICULTURAL AND IRRIGATION ENGG.(SS)</option>
-            <option value="17">BIO MEDICAL ENGINEERING (SS)</option>
-            <option value="21">CIVIL ENGINEERING</option>
-            <option value="28">COMPUTER SCIENCE AND ENGINEERING (SS)</option>
-            <option value="33">COMPUTER SCIENCE AND ENGINEERING</option>
-            <option value="38"> ELECTRONICS AND COMMUNICATION ENGINEERING</option>
-            <option value="39">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
-            <option value="41">ELECTRONICS AND COMMUNICATION ENGINEERING (SS)</option>
-            <option value="52">GEO INFORMATICS</option>
-            <option value="56">INDUSTRIAL ENGINEERING</option>
-            <option value="58">INFORMATION TECHNOLOGY (SS)</option>
-            <option value="64">MATERIAL SCIENCE AND ENGINEERING (SS)</option>
-            <option value="67">MECHANICAL ENGINEERING</option>
-            <option value="71">MINING ENGINEERING</option>
-            <option value="73">MANUFACTURING ENGINEERING</option>
-            <option value="93">PRINTING AND PACKING TECHNOLOGY</option>
-            <option value="106">CIVIL ENGINEERING (TAMIL MEDIUM)</option>
-            <option value="107">MECHANICAL ENGINEERING (TAMIL MEDIUM)</option>
-            <option value="7">APPAREL TECHNOLOGY (SS)</option>
-            <option value="24">CHEMICAL ENGINEERING</option>
-            <option value="27">CHEMICAL ENGINEERING (SS)</option>
-            <option value="32">CERAMIC TECHNOLOGY (SS)</option>
-            <option value="48">FOOD TECHNOLOGY (SS)</option>
-            <option value="54">INDUSTRIAL BIO TECHNOLOGY</option>
-            <option value="60">INDUSTRIAL BIO TECHNOLOGY (SS)</option>
-            <option value="63">LEATHER TECHNOLOGY</option>
-            <option value="88">PHARMACEUTICAL TECHNOLOGY (SS)</option>
-            <option value="90">PETROLEUM ENGINEERING AND TECHNOLOGY (SS)</option>
-            <option value="105">TEXTILE TECHNOLOGY</option>
-            <option value="1">AERONAUTICAL ENGINEERING</option>
-            <option value="8">AUTOMOBILE ENGINEERING (SS)</option>
-            <option value="10">AUTOMOBILE ENGINEERING</option>
-            <option value="40">ELECTRONICS AND INSTRUMENTATION ENGINEERING</option>
-            <option value="45">ELECTRONICS AND INSTRU ENGG(SS)</option>
-            <option value="68">MECHANICAL ENGINEERING (SS)</option>
-            <option value="91">PRODUCTION ENGINEERING</option>
-            <option value="97">RUBBER AND PLASTIC TECHNOLOGY</option>
-            <option value="61">INFORMATION TECHNOLOGY</option>
-            <option value="16">BIO TECHNOLOGY</option>
-            <option value="13">BIO MEDICAL ENGINEERING</option>
-            <option value="75">MARINE ENGINEERING</option>
-            <option value="65">MECHATRONICS</option>
-            <option value="85">PETROLEUM ENGINEERING</option>
-            <option value="2">AGRICULTURAL ENGINEERING</option>
-            <option value="66">MEDICAL ELECTRONICS ENGINEERING</option>
-            <option value="84">PETRO CHEMICAL ENGINEERING</option>
-            <option value="78">MECHANICAL AND AUTOMATION ENGINEERING</option>
-            <option value="55">INSTRUMENTATION AND CONTROL ENGINEERING</option>
-            <option value="82">PLASTIC TECHNOLOGY</option>
-            <option value="49">FASHION TECHNOLOGY</option>
-            <option value="15">BIO TECHNOLOGY (SS)</option>
-            <option value="29">CIVIL ENGINEERING (SS)</option>
-            <option value="43">ELECTRICAL AND ELECTRONICS (SANDWICH) (SS)</option>
-            <option value="50">FASHION TECHNOLOGY (SS)</option>
-            <option value="62">INSTRUMENTATION AND CONTROL ENGINEERING (SS)</option>
-            <option value="76">MECHANICAL ENGINEERING (SANDWICH) (SS)</option>
-            <option value="77">METALLURGICAL ENGINEERING</option>
-            <option value="79">METALLURGICAL ENGINEERING (SS)</option>
-            <option value="89">PRODUCTION ENGINEERING (SS)</option>
-            <option value="92">PRODUCTION ENGINEERING (SANDWICH) (SS)</option>
-            <option value="95">ROBOTICS AND AUTOMATION (SS)</option>
-            <option value="104">TEXTILE TECHNOLOGY (SS)</option>
-            <option value="46">ELECTRICAL AND ELECTRONICS ENGINEERING (SS)</option>
-            <option value="53">HANDLOOM AND TEXTILE TECHNOLOGY</option>
-            <option value="47">FOOD TECHNOLOGY</option>
-            <option value="81">Nano Science and Technology</option>
-            <option value="83">PETRO CHEMICAL TECHNOLOGY</option>
-            <option value="102">TEXTILE CHEMISTRY</option>
-            <option value="44">ELECTRONICS AND TELECOMMUNICATION ENGINEERING</option>
-            <option value="31">CIVIL ENGINEERING AND PLANNING</option>
-            <option value="42">ENVIRONMENTAL ENGINEERING</option>
-            <option value="86">PHARMACEUTICAL TECHNOLOGY</option>
-            <option value="96">ROBOTICS AND AUTOMATION</option>
-            <option value="59">INDUSTRIAL ENGINEERING AND MANAGEMENT</option>
-            <option value="87">Polymer Technology</option>
-            <option value="70">MECHANICAL ENGINEERING (SANDWICH)</option>
-            <option value="69">MECHATRONICS (SS)</option>
-            <option value="19">CHEMICAL AND ELECTRO CHEMICAL ENGINEERING (SS)</option>
-            <option value="57">Information Science and Engineering</option>
-            <option value="51">GEO INFORMATICS ENGINEERING</option>
-            <option value="6">AEROSPACE ENGINEERING</option>
-            <option value="37">CIVIL AND STRUCTUTURAL ENGINEERING</option>
-            <option value="72">MECHANICAL ENGINEERING (MANUFACTURING)</option>
-            <option value="5">COMPUTER SCIENCE AND ENGINEERING (ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING)</option>
-            <option value="12">Computer Science and Engineering (Big Data Analytics)</option>
-            <option value="18">COMPUTER SCIENCE AND BUSSINESS SYSTEM</option>
-            <option value="34">COMPUTER TECHNOLOGY</option>
-            <option value="30">COMPUTER AND COMMUNICATION ENGINEERING</option>
-            <option value="0">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE</option>
-            <option value="80">Mechatronics Engineering</option>
-            <option value="4">Artificial Intelligence and Machine Learning</option>
-            <option value="36">Cyber Security</option>
-            <option value="101">Safety and Fire Engineering</option>
-            <option value="103">Computer Science and Technology</option>
-            <option value="100">Information Science and Engineering</option>
-            <option value="99">Computer Science and Engineering (Cyber Security)</option>
-            <option value="26">M.Tech. Computer Science and Engineering (Integrated 5 years)</option>
-            <option value="74">Mechanical and Mechatronics Engineering (Additive Manufacturing)</option>
-            <option value="98">Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)</option>
-            <option value="11">Bio Technology and Bio Chemical Engineering</option>
-            <option value="35">Computer Science and Business System (SS)</option>
-            <option value="22">COMPUTER SCIENCE AND ENGINEERING (DATA SCIENCE)</option>
-            <option value="20">COMPUTER SCIENCE AND DESIGN</option>
-            <option value="9">ARTIFICIAL INTELLIGENCE AND DATA SCIENCE (SS)</option>
-            <option value="108">COMPUTER SCIENCE AND ENGINEERING (TAMIL)</option>
-            <option value="94">PHARMACEUTICAL ENGINEERING</option>
-            <option value="14">B.Plan</option>
-            <option value="25">Computer Science and Engineering (Internet of Things)</option>
-            <option value="23">Computer Science and Engineering (Artificial Intelligence and Machine Learning) (SS)</option>
-</select>
+            <div class="form-card">
+                <div class="form-card-header">
+                    <div class="form-card-icon"><i class="fas fa-book-open"></i></div>
+                    <div>
+                        <h2>Find Department</h2>
+                        <p>Discover departments available at a specific college code.</p>
+                    </div>
+                </div>
+                <div class="form-card-body">
+                    <form action="/branch_name" method="POST" onsubmit="return validateDepartmentForm()">
+                        <div class="field-group">
+                            <label for="cutoff-dept">Enter your CUTOFF</label>
+                            <input type="number" id="cutoff-dept" name="cutoff" placeholder="Score between 80 and 200" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="collge_code">Enter College Code</label>
+                            <input type="number" id="collge_code" name="collge_code" placeholder="e.g. 101" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="CASTE-dept">Select CASTE</label>
+                            <select id="CASTE-dept" name="CASTE">
+                                <option value="0">BC</option>
+                                <option value="1">BCM</option>
+                                <option value="2">MBC</option>
+                                <option value="3">OC</option>
+                                <option value="4">SC</option>
+                                <option value="5">SCA</option>
+                                <option value="6">ST</option>
+                            </select>
+                        </div>
+                        <input type="submit" class="submit-btn" value="Find Department">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
 
+    <script>
+        var notificationTimer = null;
 
-        <label for="CASTE">Select CASTE:</label>
-        <select id="CASTE" name="CASTE">
-            <option value="0">BC</option>
-            <option value="1">BCM</option>
-            <option value="2">MBC</option>
-            <option value="3">OC</option>
-            <option value="4">SC</option>
-            <option value="5">SCA</option>
-            <option value="6">ST</option>
-        </select>
+        function showNotification(message) {
+            var notification = document.getElementById("notification");
+            document.getElementById("notification-text").textContent = message;
+            notification.classList.remove("show");
+            if (notificationTimer) clearTimeout(notificationTimer);
+            requestAnimationFrame(function () {
+                notification.classList.add("show");
+            });
+            notificationTimer = setTimeout(hideNotification, 5000);
+        }
 
+        function hideNotification() {
+            document.getElementById("notification").classList.remove("show");
+            if (notificationTimer) {
+                clearTimeout(notificationTimer);
+                notificationTimer = null;
+            }
+        }
 
-        <input type="submit" value="Submit">
-    </form>
-</div>
-<div class="container">
-    
+        function validateCutoff(inputId) {
+            var cutoffInput = parseInt(document.getElementById(inputId).value);
+            if (isNaN(cutoffInput) || cutoffInput > 200 || cutoffInput < 80) {
+                showNotification("Cutoff out of range! Please enter a value between 80 and 200.");
+                return false;
+            }
+            return true;
+        }
 
-<h1>Find department</h1>
-    <form action="/branch_name" method="POST" onsubmit="return validateDepartmentForm()">
-        <label for="cutoff">Enter your CUTOFF:</label><br>
-        <input type="number" id="cutoff" name="cutoff" required><br>
+        function validateForm() {
+            return validateCutoff("cutoff");
+        }
 
-        <label for="collge_code">Enter college code :</label><br>
-        <input type="number" id="collge_code" name="collge_code" required><br>
+        function validateDepartmentForm() {
+            return validateCutoff("cutoff-dept");
+        }
 
-        <label for="CASTE">Select CASTE:</label>
-        <select id="CASTE" name="CASTE">
-            <option value="0">BC</option>
-            <option value="1">BCM</option>
-            <option value="2">MBC</option>
-            <option value="3">OC</option>
-            <option value="4">SC</option>
-            <option value="5">SCA</option>
-            <option value="6">ST</option>
-        </select>
-        <input type="submit" value="Submit">
-</form>
-</div>
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 </body>
 </html>

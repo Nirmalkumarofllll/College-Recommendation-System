@@ -1,89 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>title</title>
-  <style>
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    background-image: url("static/output.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <title>Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.container {
-    text-align: center;
-}
+        body {
+            min-height: 100vh;
+            font-family: "Inter", sans-serif;
+            background: #eef2f0;
+            color: #1a1a1a;
+        }
 
-.message-box {
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgb(255, 37, 37);
-    
-  font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-}
-.message-box  p{
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-}
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 32px;
+            background: #fff;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
 
-.no-results {
-    font-style: italic;
-    color: #000000;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 0px 0px 10px rgb(255, 37, 37);
-    font-weight: bold;
-}
-button{
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 8px;
-  border: none;
-  background-color: chocolate;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-}
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    
-  </style>
-  </head>
-  <body>
+        .brand-name {
+            font-family: "DM Serif Display", serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.04em;
+            color: #1a1a1a;
+        }
 
-    <a href="/input"><button>Back</button></a>
-    <div class="container">
-      {% if status == 0 %}
-          {% if collegename %}
-              {% for i in collegename %}
-                  <div class="message-box">
-                      <p>{{ i }}</p>
-                  </div>
-              {% endfor %}
-          {% else %}
-              <p class="no-results">Did not find any college name for your cutoff.</p>
-          {% endif %}
-      {% endif %}
-    <div class="message-box">
-      {{ branch_name }}
-    </div>
-  </div>
+        .brand-icon {
+            font-size: 1.25rem;
+        }
 
-   
-  </body>
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s, color 0.2s;
+        }
+
+        .nav-btn-outline {
+            background: #f0faf5;
+            color: #3d9a7c;
+            border: 1px solid #d5f5e3;
+        }
+
+        .nav-btn-outline:hover {
+            background: #d8eee8;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn-dark {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .nav-btn-dark:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .page-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 36px 24px 56px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .page-header-text h1 {
+            font-family: "DM Serif Display", serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .page-header-text p {
+            color: #888;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            max-width: 520px;
+        }
+
+        .record-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #d8eee8;
+            color: #1a1a1a;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .record-badge i {
+            color: #3d9a7c;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 240px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            border-bottom: 1.5px solid #ddd;
+            padding: 10px 0 10px 28px;
+            font-size: 0.92rem;
+            font-family: inherit;
+            color: #1a1a1a;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            border-bottom-color: #5cb89a;
+        }
+
+        .search-box input::placeholder {
+            color: #bbb;
+        }
+
+        .filter-info {
+            font-size: 0.82rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .results-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+        }
+
+        .results-body {
+            padding: 16px;
+        }
+
+        .college-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            border: 1px solid #f0f0f0;
+            background: #fff;
+            transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+        }
+
+        .result-item:hover {
+            background: #f8fcfa;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(92, 184, 154, 0.12);
+        }
+
+        .result-index {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 34px;
+            background: #d8eee8;
+            color: #3d9a7c;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .result-item p {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.45;
+            color: #2c3e50;
+            word-break: break-word;
+            flex: 1;
+        }
+
+        .cutoff-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+            padding: 6px 12px;
+            background: #f0faf5;
+            color: #3d9a7c;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .branch-card {
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .branch-label {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #d8eee8;
+            color: #3d9a7c;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .branch-name {
+            font-family: "DM Serif Display", serif;
+            font-size: 1.6rem;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .recommended-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 10px;
+            padding: 4px 10px;
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .result-item.recommended {
+            border-color: #b8e6d4;
+            background: #f8fcfa;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 56px 24px;
+            color: #888;
+        }
+
+        .no-results i {
+            display: block;
+            font-size: 2.2rem;
+            color: #5cb89a;
+            margin-bottom: 14px;
+        }
+
+        .no-results h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .no-results p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 14px 16px;
+            }
+
+            .page-content {
+                padding: 24px 16px 40px;
+            }
+
+            .page-header-text h1 {
+                font-size: 1.55rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+            }
+
+            .branch-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="brand">
+          <a href="/input" class="nav-btn nav-btn-outline">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+        </div>
+        <div class="nav-actions">
+            
+            <button class="nav-btn nav-btn-dark" onclick="window.location.href='/logout'">
+                <i class="fas fa-sign-out-alt"></i> Log out
+            </button>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% if result_type == 'college' %}
+        <div class="page-header">
+            <div class="page-header-text">
+                <h1>Eligible Colleges</h1>
+                <p>Colleges offering your branch where your {{ caste_label|default('category') }} cutoff qualifies. Sorted highest cutoff first — model recommendation highlighted.</p>
+            </div>
+            <span class="record-badge">
+                <i class="fas fa-university"></i>
+                <span id="total-count">{{ result_count|default(collegename|length if collegename else 0) }}</span> found
+            </span>
+        </div>
+
+        {% if collegename and collegename|length > 0 %}
+        <div class="toolbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search colleges..." oninput="filterResults()">
+            </div>
+            <span class="filter-info" id="filter-info">Showing all colleges</span>
+        </div>
+
+        <div class="results-card">
+            <div class="results-body">
+                <div class="college-list" id="college-list">
+                    {% if college_details %}
+                    {% for college in college_details %}
+                    <div class="result-item{% if college.recommended %} recommended{% endif %}" data-name="{{ college.name|lower|e }}">
+                        <span class="result-index">{{ loop.index }}</span>
+                        <p>
+                            {{ college.name }}
+                            {% if college.recommended %}
+                            <span class="recommended-badge"><i class="fas fa-star"></i> Model Pick</span>
+                            {% endif %}
+                        </p>
+                        <span class="cutoff-badge">{{ caste_label|default('Cutoff') }} {{ college.cutoff }}</span>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {% for college in collegename %}
+                    <div class="result-item" data-name="{{ college|lower|e }}">
+                        <span class="result-index">{{ loop.index }}</span>
+                        <p>{{ college }}</p>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="no-results" id="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No matching colleges</h3>
+                    <p>Try a different search term.</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="results-card">
+            <div class="no-results">
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>No colleges found</h3>
+                <p>Did not find any college name for your cutoff. Try adjusting your cutoff, branch, or caste.</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% elif result_type == 'department' %}
+        <div class="page-header">
+            <div class="page-header-text">
+                <h1>Available Departments</h1>
+                <p>Departments at this college where your cutoff meets the reservation category requirement.</p>
+            </div>
+            {% if department_results and department_results|length > 0 %}
+            <span class="record-badge">
+                <i class="fas fa-book-open"></i>
+                <span id="total-count">{{ result_count|default(department_results|length) }}</span> found
+            </span>
+            {% endif %}
+        </div>
+
+        {% if department_results and department_results|length > 0 %}
+        <div class="toolbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search departments..." oninput="filterResults()">
+            </div>
+            <span class="filter-info" id="filter-info">Showing all departments</span>
+        </div>
+
+        <div class="results-card">
+            <div class="results-body">
+                <div class="college-list" id="department-list">
+                    {% for department in department_results %}
+                    <div class="result-item{% if recommended_department and department == recommended_department %} recommended{% endif %}" data-name="{{ department|lower|e }}">
+                        <span class="result-index">{{ loop.index }}</span>
+                        <p>
+                            {{ department }}
+                            {% if recommended_department and department == recommended_department %}
+                            <span class="recommended-badge"><i class="fas fa-star"></i> Recommended</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="no-results" id="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No matching departments</h3>
+                    <p>Try a different search term.</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="results-card">
+            <div class="no-results">
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>No departments found</h3>
+                <p>{{ branch_error or "Could not find any departments for your inputs. Try a different cutoff or college code." }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="results-card">
+            <div class="no-results">
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>No results to display</h3>
+                <p>Please submit a search from the dashboard first.</p>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    {% if result_type == 'college' and collegename and collegename|length > 0 %}
+    <script>
+        var totalItems = {{ collegename|length }};
+        var resultLabel = "colleges";
+        var listId = "college-list";
+
+        function filterResults() {
+            var query = document.getElementById("search-input").value.toLowerCase().trim();
+            var items = document.querySelectorAll(".result-item");
+            var visibleCount = 0;
+
+            items.forEach(function (item) {
+                var name = item.getAttribute("data-name");
+                var match = query === "" || name.indexOf(query) !== -1;
+                item.style.display = match ? "flex" : "none";
+                if (match) visibleCount++;
+            });
+
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+            document.getElementById(listId).style.display = visibleCount === 0 ? "none" : "flex";
+
+            var filterInfo = document.getElementById("filter-info");
+            if (query === "") {
+                filterInfo.textContent = "Showing all " + resultLabel;
+            } else {
+                filterInfo.textContent = "Showing " + visibleCount + " of " + totalItems + " " + resultLabel;
+            }
+        }
+    </script>
+    {% elif result_type == 'department' and department_results and department_results|length > 0 %}
+    <script>
+        var totalItems = {{ department_results|length }};
+        var resultLabel = "departments";
+        var listId = "department-list";
+
+        function filterResults() {
+            var query = document.getElementById("search-input").value.toLowerCase().trim();
+            var items = document.querySelectorAll(".result-item");
+            var visibleCount = 0;
+
+            items.forEach(function (item) {
+                var name = item.getAttribute("data-name");
+                var match = query === "" || name.indexOf(query) !== -1;
+                item.style.display = match ? "flex" : "none";
+                if (match) visibleCount++;
+            });
+
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+            document.getElementById(listId).style.display = visibleCount === 0 ? "none" : "flex";
+
+            var filterInfo = document.getElementById("filter-info");
+            if (query === "") {
+                filterInfo.textContent = "Showing all " + resultLabel;
+            } else {
+                filterInfo.textContent = "Showing " + visibleCount + " of " + totalItems + " " + resultLabel;
+            }
+        }
+    </script>
+    {% endif %}
+
+</body>
 </html>
