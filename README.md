@@ -17,6 +17,11 @@ The integration of Python for the backend ensures robust and efficient data hand
 <p align="justify"> 
 The college list feature is developed for displaying cutoff data under various categories, such as branch code and caste, offers significant advantages for students navigating the college admission process. This tool provides a comprehensive and organized view of cutoff marks for different colleges and branches, making it easier for students to compare their options based on their academic performance and preferences. By categorizing the data according to branch codes and caste, the system ensures that users can quickly find the most relevant information tailored to their specific needs, enhancing the efficiency and accuracy of their college selection process. The backend development using Python ensures that the data is handled efficiently, allowing for quick retrieval and display of information. This real-time feature is crucial for students who need up-to-date information to make informed decisions. The frontend, created using HTML, offers a clean and user-friendly interface that simplifies interaction. The intuitive layout, with clearly labeled fields and buttons, guides users through the process of finding suitable colleges based on their cutoff marks, branch preferences, and caste category. </p>
 
-![Loginpage](./imgs/clglist.png)
+![Loginpage](./imgs/CollegeList.png)
+
+<p align="justify">
+The recommendation results are generated based on the student's cutoff marks and caste category, ensuring personalized and accurate admission guidance. Students can search by selecting a specific college to view the departments for which they are likely eligible based on their cutoff score. Alternatively, they can choose a preferred department to explore colleges where they have admission opportunities. This flexible approach helps students evaluate multiple admission pathways, compare available options, and make informed decisions about their higher education journey. By providing data-driven recommendations tailored to individual academic profiles, the system simplifies the college selection process and improves the overall admission planning experience.
+</p>
+![Loginpage](./imgs/Result.png)
 
 > Learn how to do this project: [Project](https://nirmalkumarofllll.github.io/Portfolio/CRS.html)
